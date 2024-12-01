@@ -103,6 +103,7 @@ python evaluate-asr.py \
     --seed 123456  2>&1 | tee eval_.log
 
 ## Motivation
+The complete set of token scores for the analyzed code snippets.
 ![image](https://github.com/xyyyrrr/MisNCM/blob/main/fig/1.png)
 
 # Notes
