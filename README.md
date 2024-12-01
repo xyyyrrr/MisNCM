@@ -102,8 +102,8 @@ python evaluate-asr.py \
     --eval_batch_size 64 \
     --seed 123456  2>&1 | tee eval_.log
 
-
-
+## Motivation
+![image](https://github.com/xyyyrrr/MisNCM/blob/main/fig/1.png)
 
 # Notes
 
