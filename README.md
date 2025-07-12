@@ -21,11 +21,11 @@ bash build.sh
 
 ## Datasets and Models
 
-`model.bin` is a victim model obtained in our experiment (by fine-tuning models from [CodeBERT Repository](https://github.com/microsoft/CodeBERT)), and `model-poi.bin` is the backdoored model obtained in our experiment.Both models are in `..\code\saved_models directory`
+`model.bin` is a victim model obtained in our experiment (by fine-tuning models from [CodeBERT Repository](https://github.com/microsoft/CodeBERT),  [GraphCodeBERT Repository](https://github.com/microsoft/GraphCodeBERT),  [StarCoder Repository](https://huggingface.co/microsoft/StarCoderbase1b/), [CodeLlama Repository](Https://huggingface.co/codellama/CodeLlama-7b-Instruct-hf)), and `model-poi.bin` is the backdoored model obtained in our experiment.Both models are in `..\code\saved_models directory`
 
 The datasets are in `..\preprocess\dataset`.
 
-The model and datasets can be downloaded from this  https://drive.google.com/drive/folders/1rDMpHYwB7F7np-R94nMJiQUsr-_dQuWc?usp=drive_link
+The model and datasets can be downloaded from this https://drive.google.com/drive/folders/1rDMpHYwB7F7np-R94nMJiQUsr-_dQuWc?usp=drive_link
 
 
 ## CodeBERT
@@ -108,9 +108,4 @@ The complete set of token scores for the analyzed code snippets.
 
 ##Acknowledgement
 We are very grateful that the authors of CodeBERT, GraphCodeBERT, StarCoder, CodeLlama, CodeXGLUE make their code publicly available so that we can build this repository on top of their code.
-
-
-# Notes
-
-For simplicity, we only provide the prototypical implementation of the codebert+defect task, the prototypical implementation of other tasks is basically the same.
 
