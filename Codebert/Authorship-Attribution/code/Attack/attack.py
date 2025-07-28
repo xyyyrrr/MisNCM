@@ -1,8 +1,3 @@
-# coding=utf-8
-# @Time    : 2020/8/25
-# @Author  : Zhou Yang
-# @Email   : zyang@smu.edu.sg
-# @File    : attacker.py
 '''For attacking CodeBERT models'''
 import sys
 import os
@@ -227,12 +222,12 @@ def main():
         example_start_time = time.time()
         code = source_codes[index]
         subs = substs[index]
-        code, prog_length, adv_code, true_label, orig_label, temp_label, is_success, variable_names, names_to_importance_score, nb_changed_var, nb_changed_pos, replaced_words = attacker.greedy_attack(example, code, subs)
+        code, prog_length, poi_code, true_label, orig_label, temp_label, is_success, variable_names, names_to_importance_score, nb_changed_var, nb_changed_pos, replaced_words = attacker.greedy_attack(example, code, subs)
         
         attack_type = "Greedy"
         if is_success == -1 and args.use_ga:
             # 如果不成功，则使用gi_attack
-            code, prog_length, adv_code, true_label, orig_label, temp_label, is_success, variable_names, names_to_importance_score, nb_changed_var, nb_changed_pos, replaced_words = attacker.ga_attack(example, code, subs, initial_replace=replaced_words)
+            code, prog_length, poi_code, true_label, orig_label, temp_label, is_success, variable_names, names_to_importance_score, nb_changed_var, nb_changed_pos, replaced_words = attacker.ga_attack(example, code, subs, initial_replace=replaced_words)
             attack_type = "GA"
 
         example_end_time = (time.time()-example_start_time)/60
@@ -250,22 +245,13 @@ def main():
                 replace_info += key + ':' + replaced_words[key] + ','
         print("Query times in this attack: ", model.query - query_times)
         print("All Query times: ", model.query)
-        recoder.write(index, code, prog_length, adv_code, true_label, orig_label, temp_label, is_success, variable_names, score_info, nb_changed_var, nb_changed_pos, replace_info, attack_type, model.query - query_times, example_end_time)
+        recoder.write(index, code, prog_length, poi_code, true_label, orig_label, temp_label, is_success, variable_names, score_info, nb_changed_var, nb_changed_pos, replace_info, attack_type, model.query - query_times, example_end_time)
         query_times = model.query
         
         if is_success >= -1 :
             # 如果原来正确
             total_cnt += 1
         if is_success == 1:
-            with open('ASR.jsonl', 'a', encoding='utf-8') as jsonl_file:
-                adv_data = {
-
-                    "label": temp_label,
-                    "adv_code": adv_code,
-                    "code":code,
-                    "replaced_variable_names": replaced_words  # 保存攻击成功的变量名
-                }
-                print(adv_data)
 
             success_attack += 1
         

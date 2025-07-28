@@ -180,7 +180,7 @@ def main():
 
         if is_success == -1 :
 
-            code, prog_length, adv_code, true_label, orig_label, temp_label, is_success, variable_names, names_to_importance_score, nb_changed_var, nb_changed_pos, replaced_words, temp_logits = attacker.sub_attack(
+            code, prog_length, poi_code, true_label, orig_label, temp_label, is_success, variable_names, names_to_importance_score, nb_changed_var, nb_changed_pos, replaced_words, temp_logits = attacker.sub_attack(
                 example, code, substitutions, initial_replace=replaced_words)
            
 
@@ -200,7 +200,7 @@ def main():
         print("Query times in this attack: ", model.query - query_times)
         print("All Query times: ", model.query)
 
-        recoder.write(index, code, prog_length, adv_code, true_label, orig_label, temp_label, is_success,
+        recoder.write(index, code, prog_length, poi_code, true_label, orig_label, temp_label, is_success,
                       variable_names, score_info, nb_changed_var, nb_changed_pos, replace_info,
                       model.query - query_times, example_end_time, )  # commit_id)
         query_times = model.query

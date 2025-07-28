@@ -39,28 +39,28 @@ def calculate_cscore_for_target(target_label, all_codes, all_labels):
 
 def main(tokenizer, args, file_path):
     dataset = TextDataset(tokenizer, args, file_path)
-    
-    # 加载原始 code 和 label
+
     cache_folder = os.path.dirname(file_path)
     code_pairs_file_path = os.path.join(cache_folder, f"cached_{os.path.basename(file_path).split('.')[0]}.pkl")
-    
+
     with open(code_pairs_file_path, 'rb') as f:
         all_codes = pickle.load(f)
 
     all_labels = [int(feature.label) for feature in dataset.examples]
 
-    label_set = sorted(set(all_labels))
-    cscore_by_label = {}
 
-    for target_label in tqdm(label_set, desc="Computing C-scores"):
-        cscore = calculate_cscore_for_target(target_label, all_codes, all_labels)
-        cscore_by_label[target_label] = cscore
+    target_label = 13
+    print(f"Computing C-score for label {target_label}...")
+    cscore = calculate_cscore_for_target(target_label, all_codes, all_labels)
+    cscore_by_label = {target_label: cscore}
 
-    # 保存所有 C-score
-    with open(os.path.join(cache_folder, 'cscore_by_label.pkl'), 'wb') as f:
+
+    out_path = os.path.join(cache_folder, f'cscore_by_label_label{target_label}.pkl')
+    with open(out_path, 'wb') as f:
         pickle.dump(cscore_by_label, f)
 
-    print(" Done. Saved to:", os.path.join(cache_folder, 'cscore_by_label.pkl'))
+    print("Done. Saved to:", out_path)
+
 
 if __name__ == "__main__":
     # 使用真实的 tokenizer 和 args 替换这里

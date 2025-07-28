@@ -50,12 +50,10 @@ python run.py \
     --seed 123456  2>&1 | tee train.log
 
 _Attack_
-cd preprocess
-python get_sub.py \
-    --store_path ./dataset/valid_subs.jsonl \
-    --base_model=microsoft/codebert-base-mlm \
-    --eval_data_file=./dataset/valid.jsonl \
-    --block_size 512
+
+cd code/attack
+
+First, we choose target label. Then, we use python c_score.py to gengerate candidates collection.
 
 _Trigger Generation_
 python attack.py \
